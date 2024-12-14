@@ -1,5 +1,9 @@
 const URL = "https://picsum.photos/id/";
-const SRCSET_MAXWIDTH = { tablet: 768, mobile: 425 };
+const DEVICE_WIDTH = {
+    laptop: 1440,
+    tablet: 768,
+    mobile: 425,
+};
 
 export async function getAPI(params) {
     try {
@@ -12,17 +16,13 @@ export async function getAPI(params) {
 
         const result = await response.json();
 
-        const data = result.map((el) => {
-            const tabletWidth = SRCSET_MAXWIDTH.tablet;
-            const tabletHeight = Math.floor((tabletWidth * el.height) / el.width);
-            el.download_url_tablet = URL + `${el.id}/${tabletWidth}/${tabletHeight}`;
-
-            const mobileWidth = SRCSET_MAXWIDTH.mobile;
-            const mobileHeight = Math.floor((mobileWidth * el.height) / el.width);
-            el.download_url_mobile = `${URL}${el.id}/${mobileWidth}/${mobileHeight}`;
-
-            el.width = { desktop: el.width, tablet: SRCSET_MAXWIDTH.tablet, mobile: SRCSET_MAXWIDTH.mobile };
-            return el;
+        const data = result.map((img) => {
+            for (const [device, deviceWidth] of Object.entries(DEVICE_WIDTH)) {
+                const deviceHeight = Math.floor((deviceWidth * img.height) / img.width);
+                img[`download_url_${device}`] = URL + `${img.id}/${deviceWidth}/${deviceHeight}`;
+            }
+            img.width = { ...DEVICE_WIDTH };
+            return img;
         });
 
         return data;
