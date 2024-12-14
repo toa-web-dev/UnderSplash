@@ -1,7 +1,7 @@
 /**
  *
  * @param {JSON} data
- * @returns {HTMLElement} 
+ * @returns {HTMLElement}
  */
 export default function Figure(data) {
     /*
@@ -15,12 +15,32 @@ export default function Figure(data) {
       </figcaption>
     </figure>
   */
-    const $figure = document.createElement("figure");
-    const $picture = document.createElement("picture");
-    const $picure__source = document.createElement("source")
-    const $picture__img = document.createElement("img")
-    
-    const $figcap = document.createElement("figcaption");
 
+    console.log(data);
+
+    const $figure = document.createElement("figure");
+
+    const $picture = document.createElement("picture");
+
+    const $sourceDesktop = document.createElement("source");
+    $sourceDesktop.srcset = data.download_url;
+    $sourceDesktop.media = `(min-width: ${parseInt(data.width.tablet) + 1}px)`;
+
+    const $sourceTablet = document.createElement("source");
+    $sourceTablet.srcset = data.download_url_tablet;
+    $sourceTablet.media = `(max-width: ${data.width.tablet}px) and (min-width:${parseInt(data.width.mobile + 1)}px)`;
+
+    const $sourceMobile = document.createElement("source");
+    $sourceMobile.srcset = data.download_url_mobile;
+    $sourceMobile.media = `(max-width: ${data.width.mobile}px)`;
+
+    const $img = document.createElement("img");
+    $img.src = data.download_url_mobile;
+    $img.alt = "이미지 설명";
+    $picture.append($sourceDesktop, $sourceTablet, $sourceMobile, $img);
+
+    const $figcap = document.createElement("figcaption");
+    $figcap.innerHTML = `<b>${data.author}</b>`;
     $figure.append($picture, $figcap);
+    return $figure;
 }

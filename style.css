@@ -10,10 +10,7 @@
     --grid--gap: 24px;
 }
 
-html,
-body,
-header,
-div {
+* {
     margin: 0;
     padding: 0;
 }
@@ -22,8 +19,6 @@ body {
     font-size: 18px;
     background-color: gray;
 }
-
-
 
 /* #loading_modal {
     position: fixed;
@@ -52,17 +47,16 @@ body {
     height: 120px;
     background-color: var(--document--bg--color);
 }
-.tag__list{
+.tag__list {
     display: flex;
     column-gap: 2rem;
     align-items: center;
 }
-.tag__list li{
-   display: inline-block;
-   background-color: var(--tag--color);
+.tag__list li {
+    display: inline-block;
+    background-color: var(--tag--color);
 }
 /* 헤더 스타일링 끝 */
-
 
 /* 메인 스타일링 시작 */
 #main__wrapper {
@@ -85,12 +79,17 @@ body {
     padding: 24px;
     grid-template-columns: repeat(var(--grid--top--column), minmax(0, 1fr));
     column-gap: var(--grid--gap);
+    align-items: start;
 }
 
 .grid--column {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     row-gap: var(--grid--gap);
-    grid-template-columns: minmax(0, 1fr);
+}
+
+.grid--column * {
+    height: fit-content;
 }
 
 @media (max-width: 768px) {
@@ -99,7 +98,7 @@ body {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 425px) {
     .grid--top {
         --grid--top--column: 1;
     }
