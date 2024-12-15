@@ -7,7 +7,7 @@ const DEVICE_WIDTH = {
 
 export async function getAPI(params) {
     try {
-        const response = await fetch("https://picsum.photos/v2/list?page=9&limit=15", { cache: "force-cache" });
+        const response = await fetch("https://picsum.photos/v2/list?page=6&limit=30", { cache: "force-cache" });
 
         if (!response.ok) {
             // HTTP 에러코드도
@@ -21,7 +21,7 @@ export async function getAPI(params) {
                 const deviceHeight = Math.floor((deviceWidth * img.height) / img.width);
                 img[`download_url_${device}`] = URL + `${img.id}/${deviceWidth}/${deviceHeight}`;
             }
-            img.width = { ...DEVICE_WIDTH };
+            img.deviceWidth = { ...DEVICE_WIDTH };
             return img;
         });
 
