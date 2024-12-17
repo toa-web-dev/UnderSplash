@@ -6,6 +6,7 @@
     --tag--color: #f7f2fa;
     --grid--top--column: 3;
     --grid--gap: 24px;
+    --modal--bg: rgba(0,0,0,.4);
 }
 
 * {
@@ -32,7 +33,7 @@ body {
 }
 
 /* 모달 스타일링 시작 */
-.modal__top--container {
+#modal__container {
     position: fixed;
     top: 0;
     left: 0;
@@ -42,17 +43,23 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 999;
-    background-color: rgba(233, 233, 233, 0.333);
+    background-color: var(--modal--bg);
+}
+.modal__top--wrapper {
+    position: relative;
+    top: 1rem;
+    border-radius: 0.5rem;
+    width: 90vw;
+    height: 90vh;
+    background-color: white;
 }
 
 .modal__picture--wrapper {
-    background-color: white;
-    width: 80vw;
-    height: 80vh;
+    height: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2.5rem;
+    padding: 0 2rem 2rem 2rem;
 }
 
 .modal__picture--wrapper * {
@@ -60,8 +67,15 @@ body {
     object-fit: contain;
 }
 
-/* 모달 스타일링 끝 */
+.modal__figcap--wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10%;
+    text-align: center;
+}
 
+/* 모달 스타일링 끝 */
 
 /* 헤더 스타일링 시작 */
 #top__banner {
@@ -123,7 +137,6 @@ body {
 }
 
 /* 메인 스타일링 끝 */
-
 
 @keyframes loading {
     from {
