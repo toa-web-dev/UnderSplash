@@ -18,8 +18,6 @@ export default function Figure(data) {
   </figure>
 */
 
-  console.log(data);
-
   const $figure = document.createElement("figure");
   $figure.classList.add("skeleton");
   $figure.style.aspectRatio = data.width / data.height;

@@ -6,6 +6,8 @@
     --tag--color: #f7f2fa;
     --grid--top--column: 3;
     --grid--gap: 24px;
+    --modal--picture--bg: white;
+    --modal--wrapper--bg: rgba(233, 233, 233, 0.333);
 }
 
 * {
@@ -13,9 +15,13 @@
     padding: 0;
 }
 
+.io {
+    height: 10px;
+    border: 4px solid red;
+}
+
 body {
     font-size: 18px;
-    background-color: gray;
 }
 
 .hidden {
@@ -42,11 +48,11 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 999;
-    background-color: rgba(233, 233, 233, 0.333);
+    background-color: var(--modal--wrapper--bg);
 }
 
 .modal__picture--wrapper {
-    background-color: white;
+    background-color: var(--modal--picture--bg);
     width: 80vw;
     height: 80vh;
     display: flex;
@@ -97,15 +103,12 @@ body {
     margin-inline: auto;
     max-width: var(--max-width);
     background-color: var(--document--bg--color);
+    min-height: 200vh;
 }
 
 #main__banner {
     height: 300px;
     background-color: greenyellow;
-}
-
-#main__content {
-    height: 200vh;
 }
 
 .grid--top {
