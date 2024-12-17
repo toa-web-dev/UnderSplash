@@ -1,65 +1,55 @@
-import Modal from "./Modal.js";
+// 클래스로 원하는 컴포넌트만 export 할 수 있게 ({{ $figure?: HTMLElement, $picture?: HTMLElement, $figcap?: HTMLElement }}) 유지보수 해볼 것
 
 /**
- *
+ * @description $figure $picture $figcap을 자유롭게 조합 할 수 있도록 세 요소를 각자 export합니다.
  * @param {JSON} data
- * @returns {HTMLElement}
+ * @returns  {{ $figure: HTMLElement, $picture: HTMLElement, $figcap: HTMLElement }}
  */
+
 export default function Figure(data) {
-  /*
-  <figure>
-    <picture>
-      <source srcset="/media/cc0-images/surfer-240-200.jpg" media="(orientation: portrait)">
-      <img src="/media/cc0-images/painted-hand-298-332.jpg" alt="설명 이미지">
-    </picture>
-    <figcaption>
-      <h2>작가</h2>
-    </figcaption>
-  </figure>
-*/
+    const $figure = document.createElement("figure");
+    const $picture = document.createElement("picture");
+    const $figcap = document.createElement("figcaption");
 
-  console.log(data);
+    $figure.style.aspectRatio = data.width / data.height;
+    $figcap.innerHTML = `<b>${data.author}</b>`;
 
-  const $figure = document.createElement("figure");
-  $figure.classList.add("skeleton");
-  $figure.style.aspectRatio = data.width / data.height;
+    $figure.classList.add("skeleton");
+    $picture.classList.add("hidden", "picture");
 
-  const $picture = document.createElement("picture");
-  $picture.classList.add("hidden", "picture");
+    init$picture(data, $picture);
 
-  const $sourceDesktop = document.createElement("source");
+    function init$picture(data) {
+        function createSource(srcset, media) {
+            const $source = document.createElement("source");
+            $source.srcset = srcset;
+            $source.media = media;
+            return $source;
+        }
 
-  const $sourceTablet = document.createElement("source");
+        //source 태그 생성
+        const $sourceDesktop = createSource(
+            data.download_url,
+            `(min-width: ${parseInt(data.deviceWidth.tablet) + 1}px)`
+        );
+        const $sourceTablet = createSource(
+            data.download_url_tablet,
+            `(max-width: ${data.deviceWidth.tablet}px) and (min-width:${parseInt(data.deviceWidth.mobile + 1)}px)`
+        );
+        const $sourceMobile = createSource(data.download_url_mobile, `(max-width: ${data.deviceWidth.mobile}px)`);
 
-  const $sourceMobile = document.createElement("source");
+        //img 태그 생성
+        const $img = document.createElement("img");
+        $img.src = data.download_url_mobile;
+        $img.alt = "이미지 설명";
+        $img.addEventListener("load", () => {
+            $picture.classList.remove("hidden");
+            $figure.classList.remove("skeleton");
+        });
 
-  const $img = document.createElement("img");
-  $img.src = data.download_url_mobile;
-  $img.alt = "이미지 설명";
-  $img.onload = () => {
-    $picture.classList.remove("hidden");
-    $figure.classList.remove("skeleton");
-    $picture.onclick = () => {
-      document.body.insertBefore(Modal($picture.cloneNode(true)), document.body.firstElementChild)
+        //picture 태그에 source와 img 추가
+        $picture.append($sourceDesktop, $sourceTablet, $sourceMobile, $img);
     }
-  };
 
-  $picture.append($sourceDesktop, $sourceTablet, $sourceMobile, $img);
-
-  const $figcap = document.createElement("figcaption");
-  $figcap.innerHTML = `<b>${data.author}</b>`;
-  $figure.append($picture, $figcap);
-
-  $sourceDesktop.srcset = data.download_url;
-  $sourceDesktop.media = `(min-width: ${parseInt(data.deviceWidth.tablet) + 1}px)`;
-
-  $sourceTablet.srcset = data.download_url_tablet;
-  $sourceTablet.media = `(max-width: ${data.deviceWidth.tablet}px) and (min-width:${parseInt(
-    data.deviceWidth.mobile + 1
-  )}px)`;
-
-  $sourceMobile.srcset = data.download_url_mobile;
-  $sourceMobile.media = `(max-width: ${data.deviceWidth.mobile}px)`;
-
-  return $figure;
+    return { $figure, $picture, $figcap };
 }

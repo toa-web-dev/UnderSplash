@@ -1,4 +1,4 @@
-import Figure from "./components/Figure.js";
+import FeedItem from "./components/FeedItem.js"
 import { getAPI } from "./util/getAPI.js";
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -11,7 +11,7 @@ async function initFeed(params) {
     let columnIndex = 0;
 
     data.forEach((element) => {
-        $gridColumns[columnIndex].appendChild(Figure(element));
+        $gridColumns[columnIndex].appendChild(FeedItem(element));
         columnIndex++;
         if (columnIndex > 2) {
             columnIndex = 0;
