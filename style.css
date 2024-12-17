@@ -14,6 +14,11 @@
     padding: 0;
 }
 
+.io {
+    height: 10px;
+    border: 4px solid red;
+}
+
 body {
     font-size: 18px;
 }
@@ -110,6 +115,7 @@ body {
     margin-inline: auto;
     max-width: var(--max-width);
     background-color: var(--document--bg--color);
+    min-height: 200vh;
 }
 
 #main__banner {
