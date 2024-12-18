@@ -143,6 +143,9 @@ body {
     flex-direction: column;
     row-gap: var(--grid--gap);
 }
+.main__grid-column  *{
+    max-width: 100%;
+}
 
 /* 메인 스타일링 끝 */
 
