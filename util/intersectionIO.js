@@ -1,21 +1,13 @@
-export default
-    function initIO() {
+export default function initIO(appendFeedItem) {
     let options = {
         root: null,
         rootMargin: "1000px 0px 0px 0px",
         threshold: 0,
     };
 
-    const io = new IntersectionObserver((entries, io) => {
-        console.log("감지됨", io);
-
-        console.log(entries);
+    return new IntersectionObserver((entries, io) => {
         if (entries[0].isIntersecting) {
-            console.log("api 불러옴");
-
+            appendFeedItem();
         }
-
-    }, options)
-    return io
-
-} 
+    }, options);
+}

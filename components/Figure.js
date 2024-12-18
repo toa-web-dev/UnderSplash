@@ -32,9 +32,13 @@ export default function Figure(data) {
             data.download_url,
             `(min-width: ${parseInt(data.deviceWidth.tablet) + 1}px)`
         );
+        const $sourceLaptop = createSource(
+            data.download_url_laptop,
+            `(max-width: ${data.deviceWidth.laptop}px) and (min-width:${parseInt(data.deviceWidth.tablet) + 1}px)`
+        );
         const $sourceTablet = createSource(
             data.download_url_tablet,
-            `(max-width: ${data.deviceWidth.tablet}px) and (min-width:${parseInt(data.deviceWidth.mobile + 1)}px)`
+            `(max-width: ${data.deviceWidth.tablet}px) and (min-width:${parseInt(data.deviceWidth.mobile) + 1}px)`
         );
         const $sourceMobile = createSource(data.download_url_mobile, `(max-width: ${data.deviceWidth.mobile}px)`);
 
@@ -48,7 +52,7 @@ export default function Figure(data) {
         });
 
         //picture 태그에 source와 img 추가
-        $picture.append($sourceDesktop, $sourceTablet, $sourceMobile, $img);
+        $picture.append($sourceDesktop,$sourceLaptop, $sourceTablet, $sourceMobile, $img);
     }
 
     return { $figure, $picture, $figcap };
