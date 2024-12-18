@@ -1,6 +1,6 @@
 :root {
     --max-width: 1440px;
-    --top--banner--height: 3.5rem;
+    --top--banner--height: 5rem;
     --loading-bg--color: white;
     --document--bg--color: white;
     --tag--color: #f7f2fa;
@@ -72,7 +72,7 @@ body {
     height: var(--top--banner--height);
 }
 
-.top-banner strong {
+.top-banner {
     font-size: 2rem;
 }
 
@@ -84,26 +84,27 @@ body {
     height: 120px;
     background-color: var(--document--bg--color);
     border-bottom: 1px solid var(--header--border-bottom);
+    font-size: 7rem;
 }
-.top-header__keyword-list,
-.top-header__keyword-list * {
+.banner-content__keyword-list,
+.banner-content__keyword-list * {
     margin: 0;
 }
-.top-header__keyword-list {
+.banner-content__keyword-list {
     display: flex;
-    column-gap: 2rem;
+    column-gap: 3.5rem;
     align-items: center;
 }
 
-.top-header__keyword-item {
+.banner-content__keyword-item {
     display: block;
-    font-size: 1.5rem;
+    font-size: 2rem;
     list-style-type: none;
 }
-.top-header__keyword-item sup {
+.banner-content__keyword-item sup {
     align-self: start;
     margin-left: 0.3rem;
-    font-size: 1.5rem;
+    /* font-size: 1.5rem; */
 }
 /* 헤더 스타일링 끝 */
 
