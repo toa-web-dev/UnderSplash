@@ -6,7 +6,7 @@
     --tag--color: #f7f2fa;
     --grid--top--column: 3;
     --grid--gap: 24px;
-    --modal--bg: rgba(0,0,0,.4);
+    --modal--bg: rgba(0, 0, 0, 0.4);
 }
 
 * {
@@ -37,7 +37,7 @@ body {
 }
 
 /* 모달 스타일링 시작 */
-#modal__container {
+#modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -49,7 +49,7 @@ body {
     z-index: 999;
     background-color: var(--modal--bg);
 }
-.modal__top--wrapper {
+.modal__content {
     position: relative;
     top: 1rem;
     border-radius: 0.5rem;
@@ -58,7 +58,7 @@ body {
     background-color: white;
 }
 
-.modal__picture--wrapper {
+.modal__picture-wrapper {
     height: 90%;
     display: flex;
     justify-content: center;
@@ -66,12 +66,12 @@ body {
     padding: 0 2rem 2rem 2rem;
 }
 
-.modal__picture--wrapper * {
+.modal__picture-wrapper * {
     height: 100%;
     object-fit: contain;
 }
 
-.modal__figcap--wrapper {
+.modal__figcap {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -82,13 +82,13 @@ body {
 /* 모달 스타일링 끝 */
 
 /* 헤더 스타일링 시작 */
-#top__banner {
+.top-banner {
     width: 100%;
     height: var(--top--banner--height);
     background: greenyellow;
 }
 
-#top__header {
+.top-header {
     position: sticky;
     top: 0;
     left: 0;
@@ -97,13 +97,13 @@ body {
     background-color: var(--document--bg--color);
 }
 
-.tag__list {
+.top-header__keyword-list {
     display: flex;
     column-gap: 2rem;
     align-items: center;
 }
 
-.tag__list li {
+.top-header__keyword-item {
     display: inline-block;
     background-color: var(--tag--color);
 }
@@ -111,19 +111,19 @@ body {
 /* 헤더 스타일링 끝 */
 
 /* 메인 스타일링 시작 */
-#main__wrapper {
+.main {
     margin-inline: auto;
     max-width: var(--max-width);
     background-color: var(--document--bg--color);
     min-height: 200vh;
 }
 
-#main__banner {
+.main__banner {
     height: 300px;
     background-color: greenyellow;
 }
 
-.grid--top {
+.main__grid-container {
     display: grid;
     padding: 24px;
     grid-template-columns: repeat(var(--grid--top--column), minmax(0, 1fr));
@@ -131,7 +131,7 @@ body {
     align-items: start;
 }
 
-.grid--column {
+.main__grid-column {
     display: flex;
     flex-direction: column;
     row-gap: var(--grid--gap);

@@ -10,7 +10,7 @@ async function initFeed(params) {
     appendFeedItem().then(() => {
         const $IO = document.createElement("div");
         $IO.classList.add("io");
-        document.querySelector("#main__wrapper").appendChild($IO);
+        document.querySelector("#main").appendChild($IO);
 
         const IO = initIO(appendFeedItem);
         IO.observe($IO);
@@ -18,7 +18,7 @@ async function initFeed(params) {
 }
 async function appendFeedItem() {
     const data = await getAPI();
-    const $gridColumns = document.querySelectorAll(".grid--column");
+    const $gridColumns = document.querySelectorAll(".main__grid-column");
     let columnIndex = 0;
     data.forEach((element) => {
         $gridColumns[columnIndex].appendChild(FeedItem(element));

@@ -8,48 +8,29 @@
         <title>OnSplash</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
         <link rel="stylesheet" href="style.css" />
-
     </head>
 
     <body>
         <script type="module" src="app.js"></script>
 
-        <!-- <div id="loading_modal">
-            <div class="loader"></div>
-        </div> -->
-
-        <div id="document_wrapper">
-            <div id="top__banner">배너</div>
-            <header id="top__header">
-                <div>
-                    <ul class="tag__list">
-                        <mark>키워드</mark>
-                        <li>
-                            <p>비동기 처리<sup>JS</sup></p>
-                        </li>
-                        <li>
-                            <p>API<sup>JS</sup></p>
-                        </li>
-                        <li>
-                            <p>무한 스크롤<sup>JS</sup></p>
-                        </li>
-                        <li>
-                            <p>반응형<sup>UI</sup></p>
-                        </li>
-                        <li>
-                            <p>스켈레톤<sup>UI</sup></p>
-                        </li>
-                    </ul>
-                </div>
+        <div>
+            <div class="top-banner">배너</div>
+            <header class="top-header">
+                <ul class="top-header__keyword-list">
+                    <li class="top-header__keyword-item">비동기 처리<sup>JS</sup></li>
+                    <li class="top-header__keyword-item">무한스크롤<sup>JS</sup></li>
+                    <li class="top-header__keyword-item">반응형<sup>JS</sup></li>
+                    <li class="top-header__keyword-item">스켈레톤 로더<sup>JS</sup></li>
+                </ul>
             </header>
 
-            <div id="main__wrapper">
-                <div id="main__banner"></div>
-                <main id="main__content">
-                    <div class="grid--top">
-                        <div class="grid--column"></div>
-                        <div class="grid--column"></div>
-                        <div class="grid--column"></div>
+            <div id="main" class="main">
+                <div class="main__banner"></div>
+                <main id="main__feed" class="main__feed">
+                    <div class="main__grid-container">
+                        <div class="main__grid-column"></div>
+                        <div class="main__grid-column"></div>
+                        <div class="main__grid-column"></div>
                     </div>
                 </main>
             </div>
