@@ -35,30 +35,25 @@ function initGrid(params) {
     }
 }
 
-window.addEventListener("DOMContentLoaded", async () => {
+function calculateColumnNumber(params) {
     if (window.innerWidth <= 425) {
-        columnNumber = 1;
+        return 1;
     } else if (window.innerWidth <= 768) {
-        columnNumber = 2;
-    } else {
-        columnNumber = 3;
-    }
+        return 2;
+    } else return 3;
+}
+
+window.addEventListener("DOMContentLoaded", async () => {
+    columnNumber = calculateColumnNumber();
 
     initGrid();
     fetchingData().then(fillItem);
 });
 
 window.addEventListener("resize", () => {
-    let newColumnNumber;
-    if (window.innerWidth <= 425) {
-        newColumnNumber = 1;
-    } else if (window.innerWidth <= 768) {
-        newColumnNumber = 2;
-    } else {
-        newColumnNumber = 3;
-    }
-    // columnNumber가 변할때 컬럼의 수를 변경하고, FeedItem을 다시 append한다.
+    const newColumnNumber = calculateColumnNumber();
     if (columnNumber === newColumnNumber) return;
+
     columnNumber = newColumnNumber;
 
     initGrid();
