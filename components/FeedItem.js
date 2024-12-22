@@ -8,7 +8,7 @@ import Modal from "./Modal.js";
 export default function FeedItem(data) {
     const { $figure, $picture, $figcap } = Figure(data);
 
-    $figure.appendChild($picture);
+    // $figure.appendChild($picture);
 
     const img = $picture.getElementsByTagName("img")[0];
     img.addEventListener("load", () => {

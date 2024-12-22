@@ -3,7 +3,7 @@ import { getAPI } from "./util/getAPI.js";
 import initIO from "./util/intersectionIO.js";
 
 let columnNumber;
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", async () => {
     // initFeed();
 
     if (window.innerWidth <= 425) {
@@ -13,6 +13,17 @@ window.addEventListener("DOMContentLoaded", () => {
     } else {
         columnNumber = 3;
     }
+
+    const $grid = document.querySelector(".main__grid-container");
+    $grid.replaceChildren(""); // $grid의 내부를 비운다
+
+    //columnNumber 만큼 grid의 열을 추가한다.
+    for (let i = 0; i < columnNumber; i++) {
+        const $column = document.createElement("div");
+        $column.classList.add("main__grid-column");
+        $grid.appendChild($column);
+    }
+    fetchingData().then(fillItem);
 });
 
 window.addEventListener("resize", () => {
@@ -38,22 +49,26 @@ window.addEventListener("resize", () => {
         $column.classList.add("main__grid-column");
         $grid.appendChild($column);
     }
+
+    fillItem();
 });
-// function initFeed(params) {
 
-// }
-// async function name(params) {
-//     const data = await getAPI();
+const feedItemArray = [];
 
-//     //Figure 컴포넌트가 요소인 배열을 만든다
-//     const feedItemArray = [];
-//     data.forEach((data) => {
-//         feedItemArray.push(FeedItem(data));
-//     });
+async function fetchingData(params) {
+    const data = await getAPI();
 
-//     const $gridColumns = document.querySelectorAll(".main__grid-column");
+    //Figure 컴포넌트가 요소인 배열을 만든다
+    data.forEach((data) => {
+        feedItemArray.push(FeedItem(data));
+        console.log(feedItemArray);
+    });
+}
 
-//     data.forEach((element, idx) => {
-//         $gridColumns[idx % $gridColumns.length].appendChild(FeedItem(element));
-//     });
-// }
+function fillItem() {
+    const $gridColumns = document.querySelectorAll(".main__grid-column");
+
+    feedItemArray.forEach((element, idx) => {
+        $gridColumns[idx % $gridColumns.length].appendChild(element);
+    });
+}

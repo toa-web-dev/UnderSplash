@@ -15,6 +15,9 @@ export default function Figure(data) {
     $figcap.innerHTML = `<b>${data.author}</b>`;
 
     $figure.classList.add("skeleton");
+    $figure.id = data.id
+    $figure.innerText = data.id
+    
     $picture.classList.add("hidden", "picture");
 
     init$picture(data, $picture);
