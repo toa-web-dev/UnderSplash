@@ -16,7 +16,6 @@ export default function Figure(data) {
 
     $figure.classList.add("skeleton");
     $figure.id = data.id
-    $figure.innerText = data.id
     
     $picture.classList.add("hidden", "picture");
 

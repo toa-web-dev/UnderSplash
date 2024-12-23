@@ -8,7 +8,7 @@ import Modal from "./Modal.js";
 export default function FeedItem(data) {
     const { $figure, $picture, $figcap } = Figure(data);
 
-    // $figure.appendChild($picture);
+    $figure.appendChild($picture);
 
     const img = $picture.getElementsByTagName("img")[0];
     img.addEventListener("load", () => {
@@ -22,11 +22,3 @@ export default function FeedItem(data) {
 
     return $figure;
 }
-/*
-  <figure>
-    <picture>
-      <source srcset="/media/cc0-images/surfer-240-200.jpg" media="(orientation: portrait)">
-      <img src="/media/cc0-images/painted-hand-298-332.jpg" alt="설명 이미지">
-    </picture>
-  </figure>
-*/

@@ -20,7 +20,7 @@ export default async function getAPI() {
         if (pagination.getNextPageUrl() !== null) {
             response = await fetch(pagination.getNextPageUrl(), { cache: "force-cache" });
         } else {
-            response = await fetch("https://picsum.photos/v2/list?page=1&limit=10", { cache: "force-cache" });
+            response = await fetch("https://picsum.photos/v2/list?page=3&limit=20", { cache: "force-cache" });
         }
 
         if (!response.ok) {
