@@ -25,12 +25,12 @@ function calculateColumnNumber(params) {
 }
 
 
-function initGrid(params) {
+function initGrid(columnNumber) {
     const $grid = document.querySelector(".main__grid-container");
     $grid.replaceChildren(""); // $grid의 내부를 비운다
 
     //appState.columnNumber 만큼 grid의 열을 추가한다.
-    for (let i = 0; i < appState.columnNumber; i++) {
+    for (let i = 0; i < columnNumber; i++) {
         const $column = document.createElement("div");
         $column.classList.add("main__grid-column");
         $grid.appendChild($column);
@@ -80,19 +80,18 @@ function initIO($targetPicture) {
 }
 
 window.addEventListener("DOMContentLoaded", async () => {
+    const columnNumber = calculateColumnNumber()
     appState.columnNumber = calculateColumnNumber();
 
-    initGrid();
-
+    initGrid(columnNumber);
     fetchingData().then(fillItem);
 });
 
 window.addEventListener("resize", () => {
     const newColumnNumber = calculateColumnNumber();
     if (appState.columnNumber === newColumnNumber) return;
-
     appState.columnNumber = newColumnNumber;
 
-    initGrid();
+    initGrid(newColumnNumber);
     fillItem();
 });
