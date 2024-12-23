@@ -58,25 +58,8 @@ function fillItem() {
 
     })
     const $targetPicture = filter[filter.length - 1]
-    console.log("$targetPicture은 ", $targetPicture);
+    // console.log("$targetPicture은 ", $targetPicture);
     //  $targetPicutre를 IO에서 observe, unObserve 해서 관측대상을 최신화합니다.
-}
-
-function initIO($targetPicture) {
-    const option = {
-        root: $targetPicture,
-        rootMargin: "0px",
-        threshold: 0,
-    }
-    return new IntersectionObserver((entries, observer) => {
-        if (entries[0].isIntersecting) {
-            console.log("감지됨");
-            //다음 페이지 데이터 fetching
-            observer.unobserve($targetPicture)
-            //현재 타겟 이미지 unobserve
-            //다음 타겟 이미지 observe
-        }
-    }, option)
 }
 
 window.addEventListener("DOMContentLoaded", async () => {
@@ -95,3 +78,23 @@ window.addEventListener("resize", () => {
     initGrid(newColumnNumber);
     fillItem();
 });
+
+function initIO($targetPicture) {
+    const option = {
+        root: $targetPicture,
+        rootMargin: "0px",
+        threshold: 0,
+    }
+    const io = new IntersectionObserver((entries, observer) => {
+        if (entries[0].isIntersecting) {
+            console.log("감지됨");
+            //다음 페이지 데이터 fetching
+            observer.unobserve($targetPicture)
+            //현재 타겟 이미지 unobserve
+            //다음 타겟 이미지 observe
+        }
+    }, option)
+    function set() {
+        io.observer
+    }
+}
