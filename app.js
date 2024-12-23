@@ -1,29 +1,29 @@
 import FeedItem from "./components/FeedItem.js";
 import { getAPI } from "./util/getAPI.js";
-import initIO from "./util/intersectionIO.js";
+// import initIO from "./util/intersectionIO.js";
 
 const appState = {
     columnNumber: 1,
     feedItemArray: [],
+    $targetPicture: null
 };
 
 async function fetchingData(params) {
     const data = await getAPI();
-
     //Figure 컴포넌트가 요소인 배열을 만든다
     data.forEach((data) => {
         appState.feedItemArray.push(FeedItem(data));
-        console.log(appState.feedItemArray);
     });
 }
 
-function fillItem() {
-    const $gridColumns = document.querySelectorAll(".main__grid-column");
-
-    appState.feedItemArray.forEach((element, idx) => {
-        $gridColumns[idx % $gridColumns.length].appendChild(element);
-    });
+function calculateColumnNumber(params) {
+    if (window.innerWidth <= 425) {
+        return 1;
+    } else if (window.innerWidth <= 768) {
+        return 2;
+    } else return 3;
 }
+
 
 function initGrid(params) {
     const $grid = document.querySelector(".main__grid-container");
@@ -37,18 +37,53 @@ function initGrid(params) {
     }
 }
 
-function calculateColumnNumber(params) {
-    if (window.innerWidth <= 425) {
-        return 1;
-    } else if (window.innerWidth <= 768) {
-        return 2;
-    } else return 3;
+
+function fillItem() {
+    const $gridColumns = document.querySelectorAll(".main__grid-column");
+
+    appState.feedItemArray.forEach((element, idx) => {
+        $gridColumns[idx % $gridColumns.length].appendChild(element);
+
+    });
+    const filter = appState.feedItemArray.filter((el, idx, arr) => {
+        if ($gridColumns.length === 1) {
+            return idx === arr.length - 1
+        }
+        if ($gridColumns.length === 2) {
+            return idx % 2 === 1
+        }
+        if ($gridColumns.length === 3) {
+            return idx % 3 === 2
+        }
+
+    })
+    const $targetPicture = filter[filter.length - 1]
+    console.log("$targetPicture은 ", $targetPicture);
+    //  $targetPicutre를 IO에서 observe, unObserve 해서 관측대상을 최신화합니다.
+}
+
+function initIO($targetPicture) {
+    const option = {
+        root: $targetPicture,
+        rootMargin: "0px",
+        threshold: 0,
+    }
+    return new IntersectionObserver((entries, observer) => {
+        if (entries[0].isIntersecting) {
+            console.log("감지됨");
+            //다음 페이지 데이터 fetching
+            observer.unobserve($targetPicture)
+            //현재 타겟 이미지 unobserve
+            //다음 타겟 이미지 observe
+        }
+    }, option)
 }
 
 window.addEventListener("DOMContentLoaded", async () => {
     appState.columnNumber = calculateColumnNumber();
 
     initGrid();
+
     fetchingData().then(fillItem);
 });
 
