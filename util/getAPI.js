@@ -12,7 +12,7 @@ function createPagination() {
     };
 }
 const pagination = createPagination();
-export async function getAPI() {
+export default async function getAPI() {
     try {
         // 요청 시작
 
